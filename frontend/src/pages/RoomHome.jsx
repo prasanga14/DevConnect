@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import LoggedNavbar from '../components/LoggedNavbar';
 import { v4 as uuid } from 'uuid';
 import toast from 'react-hot-toast';
@@ -24,11 +24,9 @@ const RoomHome = () => {
       return;
     }
 
-    useEffect(() => {
-      navigate(`/editor/${roomId}`, {
-        state: { username },
-      });
-    }, []);
+    navigate(`/editor/${roomId}`, {
+      state: { username },
+    });
     toast.success('Joined room sucessfully');
   };
 

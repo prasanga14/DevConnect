@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoggedNavbar from '../components/LoggedNavbar';
 import axios from 'axios';
 import { BASE_URL } from '../utils/api';
@@ -20,7 +20,9 @@ const Dashboard = () => {
   getLoggedUser();
 
   if (!isVerified) {
-    navigate('/otp-verification');
+    useEffect(() => {
+      navigate('/otp-verification');
+    }, []);
   }
 
   return (

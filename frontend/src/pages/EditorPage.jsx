@@ -31,9 +31,8 @@ const EditorPage = () => {
       const handleError = (e) => {
         console.log('Socket error => ', e);
         toast.error('Socket connection failed');
-        useEffect(() => {
-          navigate('/dashboard');
-        }, []);
+
+        navigate('/dashboard');
       };
 
       // join event sent to server
