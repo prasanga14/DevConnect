@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #010851;
+  --color-secondary: #9a7af1;
+  --color-tartiary: #707070;
+  --color-pink: #ee9ae5;
+  --color-gunmetal: #1c1b27;
+  --color-roomBG: #1b1e29;
+  --color-green: #4aed88;
+  --color-editorbg: #282a36;
+
+  --breakpoint-lessScreen: 90vh;
+}
