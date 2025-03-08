@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import user from '../images/user.png';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../utils/api';
+import axios from 'axios';
 
-const LoggedNavbar = ({ username, isVerified }) => {
-  console.log(username, isVerified);
+const LoggedNavbar = () => {
+  const id = localStorage.getItem('loggedUserId');
+
+  const [username, setUsername] = useState('');
+  const [isVerified, setVerified] = useState();
+
+  const getLoggedUser = async () => {
+    const loggedUser = await axios.get(`${BASE_URL}/api/user/u/${id}`);
+    setUsername(loggedUser.data.username);
+    setVerified(loggedUser.data.isVerified);
+  };
+  getLoggedUser();
+
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -20,13 +33,13 @@ const LoggedNavbar = ({ username, isVerified }) => {
           <a href="/dashboard">Home</a>
         </li>
         <li className="p-2 m-2">
-          <a href="/room">Create Room</a>
+          <a href="/room">Create IDE Room</a>
         </li>
         <li className="p-2 m-2">
-          <a href="/check-repo">Check Github</a>
+          <a href="/dashboard">Create Video Room</a>
         </li>
         <li className="p-2 m-2">
-          <a href="">IDE</a>
+          <a href="/check-repo">Check Github Repo</a>
         </li>
       </ul>
       <div className="userComponent mr-8">
@@ -44,7 +57,7 @@ const LoggedNavbar = ({ username, isVerified }) => {
                   onClick={() => setOpen(!open)}
                   className="p-2 text-lg cursor-pointer rounded hover:bg-blue-100"
                 >
-                  {username} {isVerified ? '✔' : 'Unverified user ❌'}
+                  {isVerified ? `${username} ✔` : 'Unverified user ❌'}
                 </li>
                 <li
                   onClick={() => setOpen(!open)}

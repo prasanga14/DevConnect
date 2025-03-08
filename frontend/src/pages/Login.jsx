@@ -17,11 +17,23 @@ const Login = () => {
         email,
         password,
       });
+      console.log(response);
+
       if (response.status === 200) {
         toast.success('Login sucessfull');
+
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('loggedUserId', response.data.loggedUserId);
-        navigate('/dashboard');
+        localStorage.setItem(
+          'isLoggedUserVerified',
+          response.data.isLoggedUserVerified
+        );
+
+        if (response.data.isLoggedUserVerified) {
+          navigate('/dashboard');
+        } else {
+          navigate('/otp-verification');
+        }
       }
     } catch (error) {
       console.log(error);
@@ -38,7 +50,7 @@ const Login = () => {
 
         <input
           className="border-1 p-2 m-2"
-          type="text"
+          type="email"
           placeholder="Enter your Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
